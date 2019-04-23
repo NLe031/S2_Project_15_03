@@ -52,17 +52,17 @@ function sessionTest() {
 };
 // This function will calculate the registration cost and save information about the customer’s choices in session storage.
 function calcCart() {
-      var confName = document.getElementById("fnBox").value + " " + document.getElementById("lnBox").value;
+      sessionBox.confName = document.getElementById("fnBox").value + " " + document.getElementById("lnBox").value;
 
-      var confGroup = document.getElementById("groupBox").value;
+      sessionBox.confGroup = document.getElementById("groupBox").value;
 
-      var confMail = document.getElementById("mailBox").value;
+      sessionBox.confMail = document.getElementById("mailBox").value;
 
-      var confPhone = document.getElementById("phoneBox").value;
+      sessionBox.confPhone = document.getElementById("phoneBox").value;
 
-      var confBanquet = document.getElementById("banquetBox").value;
+      sessionBox.confBanquet = document.getElementById("banquetBox").value;
 
-      var confBanquetCost = confBanquet * 55;
+      sessionBox.confBanquetCost = confBanquet * 55;
 
       var selectedIndex = document.forms.regForm.elements.sessionBox.value;
 
