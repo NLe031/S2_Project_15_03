@@ -27,16 +27,16 @@
 
 
 */
-
+//These events watch for a change in the input boxes.
 window.addEventListener("load", function () {
       calcCart();
-      regSubmit.onclick = sessionTest();
-      document.getElementById("fnBox").oninput = calcCart;
-      document.getElementById("lnBox").oninput = calcCart;
-      document.getElementById("groupBox").oninput = calcCart;
-      document.getElementById("mailBox").oninput = calcCart;
-      document.getElementById("phoneBox").oninput = calcCart;
-      document.getElementById("banquetBox").oninput = calcCart;
+      document.getElementById("regSubmit").onclick = sessionTest;
+      document.getElementById("fnBox").onblur = calcCart;
+      document.getElementById("lnBox").onblur = calcCart;
+      document.getElementById("groupBox").onblur = calcCart;
+      document.getElementById("mailBox").onblur = calcCart;
+      document.getElementById("phoneBox").onblur = calcCart;
+      document.getElementById("banquetBox").onblur = calcCart;
       document.getElementById("sessionBox").onchange = calcCart;
       document.getElementById("mediaCB").onclick = calcCart;
 
@@ -52,36 +52,43 @@ function sessionTest() {
 };
 // This function will calculate the registration cost and save information about the customer’s choices in session storage.
 function calcCart() {
-      sessionBox.confName = document.getElementById("fnBox").value + " " + document.getElementById("lnBox").value;
+      sessionStorage.confName = document.forms.regForm.elements.fnBox.value + " " + document.forms.regForm.elements.lnBox.value;
 
-      sessionBox.confGroup = document.getElementById("groupBox").value;
+      sessionStorage.confGroup = document.forms.regForm.elements.groupBox.value;
 
-      sessionBox.confMail = document.getElementById("mailBox").value;
+      sessionStorage.confMail = document.forms.regForm.elements.mailBox.value;
 
-      sessionBox.confPhone = document.getElementById("phoneBox").value;
+      sessionStorage.confPhone = document.forms.regForm.elements.phoneBox.value;
 
-      sessionBox.confBanquet = document.getElementById("banquetBox").value;
+      sessionStorage.confBanquet = document.forms.regForm.elements.banquetBox.value;
 
-      sessionBox.confBanquetCost = confBanquet * 55;
+      sessionStorage.confBanquetCost = sessionStorage.confBanquet * 55;
 
       var selectedIndex = document.forms.regForm.elements.sessionBox.value;
 
-      if (sessionBox.selectedIndex !== -1) {
-            var confsession = document.forms.regForm.elements.sessionBox[selectedIndex].textContext;
+      if (sessionStorage.selectedIndex !== -1) {
+            sessionStorage.confSession = document.forms.regForm.elements.sessionBox[selectedIndex];
 
-            var confSessionCost = document.forms.regForm.elements.sessionBox.value;
+            sessionStorage.confSessionCost = document.forms.regForm.elements.sessionBox.value;
       } else {
-            confsession = "";
-            confSessionCost = 0;
+            sessionStorage.confsession = "";
+            sessionStorage.confSessionCost = 0;
       }
 
       if (document.getElementById("mediaCB").onclick) {
-            var confPack = "yes";
-            var confPackCost = 115;
+            sessionStorage.confPack = "yes";
+            sessionStorage.confPackCost = 115;
       } else {
-            confPack = "no";
-            confPackCost = 0;
+            sessionStorage.confPack = "no";
+            sessionStorage.confPackCost = 0;
       }
 
+      sessionStorage.confTotal = parseFloat(sessionStorage.confBanquetCost) + parseFloat(sessionStorage.confSessionCost) + parseFloat(sessionStorage.confPackCost);
+
+      writeSessionValues();
+}
+
+//This function will write the data values from session storage in to the registration summary form.
+function writeSessionValues() {
 
 }
